@@ -93,7 +93,7 @@ def main():
             for k in increments:
                 l = 1 - i - j - k
                 #if (1e-10 < l):
-                if (0 < l):
+                if (-1e10 < l):
                     print i,j,k,l
                     myAllocations = np.array([i, j, k, 0.00, l])
                     myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn = simulate(
