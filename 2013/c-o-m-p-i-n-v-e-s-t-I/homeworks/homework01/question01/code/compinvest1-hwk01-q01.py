@@ -28,7 +28,7 @@ import numpy as np
 print "Pandas Version", pd.__version__
 
 ####################################################################################################
-def simulate(startDate, endDate, symbols, allocations, closingPrices):
+def simulate(allocations, closingPrices):
 
     sharpeRatio = 0
     cumulativeReturn = 0
@@ -63,62 +63,38 @@ def simulate(startDate, endDate, symbols, allocations, closingPrices):
 def main():
     ''' Main Function'''
 
-    # List of symbols
-    #ls_symbols = ["AAPL", "GLD", "GOOG", "$SPX", "XOM"]
-    ls_symbols = ["AAPL", "GLD", "GOOG", "$SPX", "XOM"]
-
-    # Start and End date of the charts
-    dt_start = dt.datetime(2011,  1,  1)
-    dt_end   = dt.datetime(2011, 12, 31)
-
-    #myCsvFile = open('closing-prices-1.csv',"r")
-    #myCsvFile = open('closing-prices-2.csv',"r")
-    myCsvFile = open('closing-prices-4.csv',"r")
-    myClosingPrices = np.genfromtxt(myCsvFile, skip_header = 0, delimiter='\t', dtype=None)
+    myCsvFile = open('closing-prices.csv',"r")
+    symbols = myCsvFile.readline().strip().split('\t')
     myCsvFile.close()
-    symbols = myClosingPrices[0,:]
 
-    myCsvFile = open('closing-prices-4.csv',"r")
+    myCsvFile = open('closing-prices.csv',"r")
     myClosingPrices = np.genfromtxt(myCsvFile, skip_header = 1, delimiter='\t', dtype=float)
     myCsvFile.close()
 
     myCsvFile = open('portfolios.csv',"wb")
     myCsvWriter = csv.writer(myCsvFile,delimiter='\t')
-    #myCsvWriter.writerow(['C', 'GS', 'IBM', 'HNZ', 'stdDev', 'avgDailyReturn', 'Sharpe', 'cumulativeReturn'])
-    myCsvWriter.writerow([symbols, 'stdDev', 'avgDailyReturn', 'Sharpe', 'cumulativeReturn'])
+    myCsvWriter.writerow(symbols + ['stdDev', 'avgDailyReturn', 'Sharpe', 'cumulativeReturn'])
 
     increments = np.array(range(0,11),dtype=float) / 10
+    print "increments"
+    print increments
+
     for i in increments:
         for j in increments:
             for k in increments:
-                l = 1 - i - j - k
-                #if (1e-10 < l):
-                if (-1e10 < l):
+                l = 1 - (i + j + k)
+                if (-0.001 <= l):
+                    if (0.001 > l):
+                        l = 0
                     print i,j,k,l
-                    myAllocations = np.array([i, j, k, 0.00, l])
+                    myAllocations = np.array([i, j, k, l])
                     myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn = simulate(
-                        startDate = dt_start,
-                        endDate = dt_end,
-                        symbols = ls_symbols,
-                        allocations = myAllocations,
+                        allocations   = myAllocations,
                         closingPrices = myClosingPrices
                         )
                     myCsvWriter.writerow([i,j,k,l,myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn])
 
     myCsvFile.close()
-
-    #myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn = simulate(
-    #    startDate = dt_start,
-    #    endDate = dt_end,
-    #    symbols = ls_symbols,
-    #    allocations = myAllocations,
-    #    closingPrices = myClosingPrices
-    #    )
-
-    #print myStdDev
-    #print myAvgDailyReturn
-    #print mySharpeRatio
-    #print myCumulativeReturn
 
 ####################################################################################################
 ####################################################################################################

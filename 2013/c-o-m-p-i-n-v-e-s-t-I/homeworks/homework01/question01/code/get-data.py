@@ -30,10 +30,11 @@ def main():
     ''' Main Function'''
 
     # List of symbols
-    # ls_symbols = ["AAPL", "GLD", "GOOG", "$SPX", "XOM"]
+    #ls_symbols = ["AAPL", "GLD", "GOOG", "$SPX", "XOM"]
     #ls_symbols = ["AXP", "HPQ", "IBM", "$SPX", "HNZ"]
     #ls_symbols = ["C", "GS", "IBM", "$SPX", "HNZ"]
-    ls_symbols = ['BRCM', 'ADBE', 'AMD', '$SPX', 'ADI']
+    #ls_symbols = ['BRCM', 'ADBE', 'AMD', '$SPX', 'ADI']
+    ls_symbols = ['BRCM', 'ADBE', 'AMD', 'ADI']
 
     # Start and End date of the charts
     dt_start = dt.datetime(2010,  1,  1)
