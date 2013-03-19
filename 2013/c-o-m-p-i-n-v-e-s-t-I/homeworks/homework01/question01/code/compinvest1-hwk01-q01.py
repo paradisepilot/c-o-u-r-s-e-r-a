@@ -79,16 +79,12 @@ def main():
         for j in range(0,11-i):
             for k in range(0,11-i-j):
                 l = 10 - (i + j + k)
-                if (-0.001 <= l):
-                    #if (0.001 > l):
-                    #    l = 0
-                    print i,j,k,l
-                    myAllocations = np.array([i/10.0, j/10.0, k/10.0, l/10.0])
-                    myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn = simulate(
-                        allocations   = myAllocations,
-                        closingPrices = myClosingPrices
-                        )
-                    myCsvWriter.writerow([i/10.0,j/10.0,k/10.0,l/10.0,myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn])
+                myAllocations = np.array([i/10.0, j/10.0, k/10.0, l/10.0])
+                myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn = simulate(
+                    allocations   = myAllocations,
+                    closingPrices = myClosingPrices
+                    )
+                myCsvWriter.writerow([i/10.0,j/10.0,k/10.0,l/10.0,myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn])
 
     myCsvFile.close()
 
