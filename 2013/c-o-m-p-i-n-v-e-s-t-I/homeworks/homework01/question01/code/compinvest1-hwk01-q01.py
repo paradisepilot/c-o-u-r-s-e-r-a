@@ -75,24 +75,20 @@ def main():
     myCsvWriter = csv.writer(myCsvFile,delimiter='\t')
     myCsvWriter.writerow(symbols + ['stdDev', 'avgDailyReturn', 'Sharpe', 'cumulativeReturn'])
 
-    increments = np.array(range(0,11),dtype=float) / 10
-    print "increments"
-    print increments
-
-    for i in increments:
-        for j in increments:
-            for k in increments:
-                l = 1 - (i + j + k)
+    for i in range(0,11):
+        for j in range(0,11-i):
+            for k in range(0,11-i-j):
+                l = 10 - (i + j + k)
                 if (-0.001 <= l):
-                    if (0.001 > l):
-                        l = 0
+                    #if (0.001 > l):
+                    #    l = 0
                     print i,j,k,l
-                    myAllocations = np.array([i, j, k, l])
+                    myAllocations = np.array([i/10.0, j/10.0, k/10.0, l/10.0])
                     myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn = simulate(
                         allocations   = myAllocations,
                         closingPrices = myClosingPrices
                         )
-                    myCsvWriter.writerow([i,j,k,l,myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn])
+                    myCsvWriter.writerow([i/10.0,j/10.0,k/10.0,l/10.0,myStdDev, myAvgDailyReturn, mySharpeRatio, myCumulativeReturn])
 
     myCsvFile.close()
 
