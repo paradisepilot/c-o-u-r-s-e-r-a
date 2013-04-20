@@ -11,12 +11,12 @@
 
 function Joint = ComputeJointDistribution(F)
 
-  % Check for empty factor list
-  if (numel(F) == 0)
-      warning('Error: empty factor list');
-      Joint = struct('var', [], 'card', [], 'val', []);      
-      return;
-  end
+% Check for empty factor list
+if (numel(F) == 0)
+	warning('Error: empty factor list');
+	Joint = struct('var', [], 'card', [], 'val', []);      
+	return;
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % YOUR CODE HERE:
@@ -25,7 +25,28 @@ function Joint = ComputeJointDistribution(F)
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
  
-Joint = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
+%Joint = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
+
+if (numel(F) == 1)
+
+	Joint = F(1);
+	return;
+
+elseif (numel(F) == 2)
+
+	Joint = FactorProduct(F(1),F(2));
+	return;
+
+elseif (numel(F) > 2)
+
+	Joint = FactorProduct(F(1),F(2));
+	for i = 3:length(F)
+		Joint = FactorProduct(Joint,F(i));
+	end
+	Joint;
+	return;
+
+end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end
