@@ -41,15 +41,10 @@ for i = 1:size(E, 1),
             %       and SetValueOfAssignment
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-			disp("###########################################")
-			disp("v")
-			disp( v )
-			disp("x")
-			disp( x )
-			disp("F(j)")
-			disp( F(j) )
-			disp( IndexToAssignment([1:length(F(j).val)], F(j).card) )
-            
+		assignments = IndexToAssignment([1:length(F(j).val)], F(j).card);
+		indicators  = transpose(assignments(:,indx) == x);
+		F(j).val    = F(j).val .* indicators;
+
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 				% Check validity of evidence / resulting factor
@@ -60,5 +55,9 @@ for i = 1:size(E, 1),
         end;
     end;
 end;
+
+F;
+
+return;
 
 end
