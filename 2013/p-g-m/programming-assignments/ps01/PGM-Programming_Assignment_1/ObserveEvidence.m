@@ -13,6 +13,7 @@ function F = ObserveEvidence(F, E)
 % Iterate through all evidence
 
 for i = 1:size(E, 1),
+
     v = E(i, 1); % variable
     x = E(i, 2); % value
 
@@ -39,6 +40,15 @@ for i = 1:size(E, 1),
             % Hint: You might find it helpful to use IndexToAssignment
             %       and SetValueOfAssignment
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+			disp("###########################################")
+			disp("v")
+			disp( v )
+			disp("x")
+			disp( x )
+			disp("F(j)")
+			disp( F(j) )
+			disp( IndexToAssignment([1:length(F(j).val)], F(j).card) )
             
             %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
