@@ -16,9 +16,9 @@ function M = ComputeMarginal(V, F, E)
 
 % Check for empty factor list
 if (numel(F) == 0)
-      warning('Warning: empty factor list');
-      M = struct('var', [], 'card', [], 'val', []);      
-      return;
+	warning('Warning: empty factor list');
+	M = struct('var', [], 'card', [], 'val', []);      
+	return;
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,7 +27,13 @@ end
 % Remember to renormalize the entries of M!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-M = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
+Joint   = ComputeJointDistribution(F);
+Reduced = ObserveEvidence(Joint,E);
+M       = FactorMarginalization(Reduced,setdiff(Reduced.var,V));
+M.val   = M.val / sum(M.val);
+M;
+
+return;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end

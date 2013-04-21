@@ -39,7 +39,8 @@ indxB = AssignmentToIndex(assignments(:, mapB), B.card);
 % Correctly populate the factor values of B
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-B.val = accumarray([indxB , ones(size(indxB))], A.val);
+temp  = reshape([indxB ones(size(indxB))],length(indxB),2);
+B.val = reshape(accumarray(temp, A.val),1,length(B.val));
 B     = struct('var', B.var, 'card', B.card, 'val', B.val);
 
 return;
