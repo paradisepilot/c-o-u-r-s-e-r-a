@@ -66,4 +66,27 @@ numAlleles = length(alleleFreqs); % Number of alleles
 % numPeople+1 - 2*numPeople: phenotype variables
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
+% First, construct genotype and phenotype factors for people without
+% parental data.
+for varIndex = 1:numPeople
+	if (1 == prod([0 0] == pedigree.parents(varIndex,:)))
+		factorList(varIndex)             = genotypeGivenAlleleFreqsFactor(alleleFreqs,varIndex);
+		factorList(numPeople + varIndex) = phenotypeGivenGenotypeFactor(alphaList, varIndex, numPeople + varIndex);
+	end
+end
+
+% Next, construct genotype and phenotype factors for people with parental data.
+for varIndex = 1:numPeople
+	if (0 == prod([0 0] == pedigree.parents(varIndex,:)))
+		varIndexParent1 = pedigree.parents(varIndex,1);
+		varIndexParent2 = pedigree.parents(varIndex,2);
+		factorList(varIndex)             = genotypeGivenParentsGenotypesFactor(numAlleles, varIndex, varIndexParent1, varIndexParent2);
+		factorList(numPeople + varIndex) = phenotypeGivenGenotypeFactor(alphaList, varIndex, numPeople + varIndex);
+	end
+end
+
+factorList;
+return;
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
