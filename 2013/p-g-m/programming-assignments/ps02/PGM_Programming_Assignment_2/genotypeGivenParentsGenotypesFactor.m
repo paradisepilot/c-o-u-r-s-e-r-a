@@ -57,9 +57,46 @@ genotypeFactor = struct('var', [], 'card', [], 'val', []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Fill in genotypeFactor.var.  This should be a 1-D row vector.
+genotypeFactor.var = [genotypeVarChild genotypeVarParentOne genotypeVarParentTwo];
+
 % Fill in genotypeFactor.card.  This should be a 1-D row vector.
+numGenotypes = size(genotypesToAlleles,1);
+genotypeFactor.card = [numGenotypes numGenotypes numGenotypes];
 
 genotypeFactor.val = zeros(1, prod(genotypeFactor.card));
 % Replace the zeros in genotypeFactor.val with the correct values.
+
+temp = IndexToAssignment([1:length(genotypeFactor.val)],genotypeFactor.card);
+%disp("temp");
+%disp( temp );
+
+for i = 1:length(genotypeFactor.val)
+	%childGenotypeIndex   = temp(i,1);
+	%parent1GenotypeIndex = temp(i,2);
+	%parent2GenotypeIndex = temp(i,3);
+
+	childGenotype   = genotypesToAlleles(temp(i,1),:);
+	parent1Genotype = genotypesToAlleles(temp(i,2),:);
+	parent2Genotype = genotypesToAlleles(temp(i,3),:);
+
+	disp("########################")
+	disp("i");
+	disp( i );
+
+	disp("childGenotype");
+	disp( childGenotype );
+
+	disp("parent1Genotype");
+	disp( parent1Genotype );
+
+	disp("parent2Genotype");
+	disp( parent2Genotype );
+
+	% continue;
+end
+
+
+genotypeFactor;
+return;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
