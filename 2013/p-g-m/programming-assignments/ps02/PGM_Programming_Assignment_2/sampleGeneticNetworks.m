@@ -10,29 +10,56 @@
 isDominant = 1;
 genotypeVar = 1;
 phenotypeVar = 3;
-phenotypeFactor = struct('var', [3,1], 'card', [2,3], 'val', [1,0,1,0,0,1]); % Comment out this line for testing
-% phenotypeFactor = phenotypeGivenGenotypeMendelianFactor(isDominant, genotypeVar, phenotypeVar);
+phenotypeFactor         = struct('var', [3,1], 'card', [2,3], 'val', [1,0,1,0,0,1]); % Comment out this line for testing
+computedPhenotypeFactor = phenotypeGivenGenotypeMendelianFactor(isDominant, genotypeVar, phenotypeVar);
+
+%disp("phenotypeFactor");
+%disp( phenotypeFactor );
+%disp("computedPhenotypeFactor");
+%disp( computedPhenotypeFactor );
 
 % Testing phenotypeGivenGenotypeFactor:
 alphaList = [0.8; 0.6; 0.1];
 genotypeVar = 1;
 phenotypeVar = 3;
 phenotypeFactorAlpha = struct('var', [3,1], 'card', [2,3], 'val', [0.8,0.2,0.6,0.4,0.1,0.9]); % Comment out this line for testing
-% phenotypeFactorAlpha = phenotypeGivenGenotypeFactor(alphaList, genotypeVar, phenotypeVar);
+computedPhenotypeFactorAlpha = phenotypeGivenGenotypeFactor(alphaList, genotypeVar, phenotypeVar);
+
+%disp("phenotypeFactorAlpha");
+%disp( phenotypeFactorAlpha );
+%disp("computedPhenotypeFactorAlpha");
+%disp( computedPhenotypeFactorAlpha );
 
 % Testing genotypeGivenAlleleFreqsFactor:
 alleleFreqs = [0.1; 0.9];
 genotypeVar = 1;
-genotypeFactor = struct('var', [1], 'card', [3], 'val', [0.01,0.18,0.81]); % Comment out this line for testing
-% genotypeFactor = genotypeGivenAlleleFreqsFactor(alleleFreqs, genotypeVar);
+genotypeFactor         = struct('var', [1], 'card', [3], 'val', [0.01,0.18,0.81]); % Comment out this line for testing
+computedGenotypeFactor = genotypeGivenAlleleFreqsFactor(alleleFreqs, genotypeVar);
+
+%disp("genotypeFactor");
+%disp( genotypeFactor );
+%disp("computedGenotypeFactor");
+%disp( computedGenotypeFactor );
+
+%alleleFreqs = [0.1; 0.3; 0.6];
+%temp = genotypeGivenAlleleFreqsFactor(alleleFreqs, genotypeVar);
+%disp("temp");
+%disp( temp );
+%disp("sum(temp.val)");
+%disp( sum(temp.val) );
 
 % Testing genotypeGivenParentsGenotypesFactor:
 numAlleles = 2;
 genotypeVarChild = 3;
 genotypeVarParentOne = 1;
 genotypeVarParentTwo = 2;
-genotypeFactorPar = struct('var', [3,1,2], 'card', [3,3,3], 'val', [1,0,0,0.5,0.5,0,0,1,0,0.5,0.5,0,0.25,0.5,0.25,0,0.5,0.5,0,1,0,0,0.5,0.5,0,0,1]); % Comment out this line for testing
-% genotypeFactorPar = genotypeGivenParentsGenotypesFactor(numAlleles, genotypeVarChild, genotypeVarParentOne, genotypeVarParentTwo);
+genotypeFactorPar         = struct('var', [3,1,2], 'card', [3,3,3], 'val', [1,0,0,0.5,0.5,0,0,1,0,0.5,0.5,0,0.25,0.5,0.25,0,0.5,0.5,0,1,0,0,0.5,0.5,0,0,1]); % Comment out this line for testing
+computedGenotypeFactorPar = genotypeGivenParentsGenotypesFactor(numAlleles, genotypeVarChild, genotypeVarParentOne, genotypeVarParentTwo);
+
+disp("genotypeFactorPar");
+disp( genotypeFactorPar );
+disp("computedGenotypeFactorPar");
+disp( computedGenotypeFactorPar );
 
 % Testing constructGeneticNetwork:
 pedigree = struct('parents', [0,0;1,3;0,0]);
