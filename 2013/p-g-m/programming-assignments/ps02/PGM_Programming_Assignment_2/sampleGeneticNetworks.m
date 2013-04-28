@@ -65,6 +65,12 @@ disp( transpose([genotypeFactorPar.val; computedGenotypeFactorPar.val]) );
 disp("TEMP");
 disp( transpose([transpose(IndexToAssignment(1:length(genotypeFactorPar.val),genotypeFactorPar.card)); genotypeFactorPar.val; computedGenotypeFactorPar.val]) );
 
+TEMP = abs(genotypeFactorPar.val - computedGenotypeFactorPar.val);
+disp("TEMP");
+disp( TEMP );
+disp("sum(TEMP)");
+disp( sum(TEMP) );
+
 % Testing constructGeneticNetwork:
 pedigree = struct('parents', [0,0;1,3;0,0]);
 pedigree.names = {'Ira','James','Robin'};
