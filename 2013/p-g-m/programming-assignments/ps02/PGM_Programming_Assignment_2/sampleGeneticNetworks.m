@@ -56,28 +56,66 @@ genotypeVarParentTwo = 2;
 genotypeFactorPar         = struct('var', [3,1,2], 'card', [3,3,3], 'val', [1,0,0,0.5,0.5,0,0,1,0,0.5,0.5,0,0.25,0.5,0.25,0,0.5,0.5,0,1,0,0,0.5,0.5,0,0,1]); % Comment out this line for testing
 computedGenotypeFactorPar = genotypeGivenParentsGenotypesFactor(numAlleles, genotypeVarChild, genotypeVarParentOne, genotypeVarParentTwo);
 
-disp("genotypeFactorPar");
-disp( genotypeFactorPar );
-disp("computedGenotypeFactorPar");
-disp( computedGenotypeFactorPar );
-disp("transpose([genotypeFactorPar.val, computedGenotypeFactorPar.val])");
-disp( transpose([genotypeFactorPar.val; computedGenotypeFactorPar.val]) );
-disp("TEMP");
-disp( transpose([transpose(IndexToAssignment(1:length(genotypeFactorPar.val),genotypeFactorPar.card)); genotypeFactorPar.val; computedGenotypeFactorPar.val]) );
+%disp("genotypeFactorPar");
+%disp( genotypeFactorPar );
+%disp("computedGenotypeFactorPar");
+%disp( computedGenotypeFactorPar );
+%disp("transpose([genotypeFactorPar.val, computedGenotypeFactorPar.val])");
+%disp( transpose([genotypeFactorPar.val; computedGenotypeFactorPar.val]) );
+%disp("TEMP");
+%disp( transpose([transpose(IndexToAssignment(1:length(genotypeFactorPar.val),genotypeFactorPar.card)); genotypeFactorPar.val; computedGenotypeFactorPar.val]) );
 
-TEMP = abs(genotypeFactorPar.val - computedGenotypeFactorPar.val);
-disp("TEMP");
-disp( TEMP );
-disp("sum(TEMP)");
-disp( sum(TEMP) );
+%TEMP = abs(genotypeFactorPar.val - computedGenotypeFactorPar.val);
+%disp("TEMP");
+%disp( TEMP );
+%disp("sum(TEMP)");
+%disp( sum(TEMP) );
 
 % Testing constructGeneticNetwork:
 pedigree = struct('parents', [0,0;1,3;0,0]);
 pedigree.names = {'Ira','James','Robin'};
 alleleFreqs = [0.1; 0.9];
 alphaList = [0.8; 0.6; 0.1];
-sampleFactorList = load('sampleFactorList.mat'); % Comment out this line for testing
-% sampleFactorList = constructGeneticNetwork(pedigree, alleleFreqs, alphaList);
+sampleFactorList         = load('sampleFactorList.mat'); % Comment out this line for testing
+computedSampleFactorList = constructGeneticNetwork(pedigree, alleleFreqs, alphaList);
+
+disp("########################################");
+disp("sampleFactorList");
+disp( sampleFactorList );
+disp("computedSampleFactorList");
+disp( computedSampleFactorList );
+disp("########################################");
+disp("sampleFactorList.sampleFactorList(1)");
+disp( sampleFactorList.sampleFactorList(1) );
+disp("computedSampleFactorList(1)");
+disp( computedSampleFactorList(1) );
+disp("########################################");
+disp("sampleFactorList.sampleFactorList(2)");
+disp( sampleFactorList.sampleFactorList(2) );
+disp("computedSampleFactorList(2)");
+disp( computedSampleFactorList(2) );
+disp("########################################");
+disp("sampleFactorList.sampleFactorList(3)");
+disp( sampleFactorList.sampleFactorList(3) );
+disp("computedSampleFactorList(3)");
+disp( computedSampleFactorList(3) );
+disp("########################################");
+disp("sampleFactorList.sampleFactorList(4)");
+disp( sampleFactorList.sampleFactorList(4) );
+disp("computedSampleFactorList(4)");
+disp( computedSampleFactorList(4) );
+disp("########################################");
+disp("sampleFactorList.sampleFactorList(5)");
+disp( sampleFactorList.sampleFactorList(5) );
+disp("computedSampleFactorList(5)");
+disp( computedSampleFactorList(5) );
+disp("########################################");
+disp("sampleFactorList.sampleFactorList(6)");
+disp( sampleFactorList.sampleFactorList(6) );
+disp("computedSampleFactorList(6)");
+disp( computedSampleFactorList(6) );
+disp("########################################");
+
 
 % Testing phenotypeGivenCopiesFactor:
 alphaListThree = [0.8; 0.6; 0.1; 0.5; 0.05; 0.01];
