@@ -79,43 +79,42 @@ alphaList = [0.8; 0.6; 0.1];
 sampleFactorList         = load('sampleFactorList.mat'); % Comment out this line for testing
 computedSampleFactorList = constructGeneticNetwork(pedigree, alleleFreqs, alphaList);
 
-disp("########################################");
-disp("sampleFactorList");
-disp( sampleFactorList );
-disp("computedSampleFactorList");
-disp( computedSampleFactorList );
-disp("########################################");
-disp("sampleFactorList.sampleFactorList(1)");
-disp( sampleFactorList.sampleFactorList(1) );
-disp("computedSampleFactorList(1)");
-disp( computedSampleFactorList(1) );
-disp("########################################");
-disp("sampleFactorList.sampleFactorList(2)");
-disp( sampleFactorList.sampleFactorList(2) );
-disp("computedSampleFactorList(2)");
-disp( computedSampleFactorList(2) );
-disp("########################################");
-disp("sampleFactorList.sampleFactorList(3)");
-disp( sampleFactorList.sampleFactorList(3) );
-disp("computedSampleFactorList(3)");
-disp( computedSampleFactorList(3) );
-disp("########################################");
-disp("sampleFactorList.sampleFactorList(4)");
-disp( sampleFactorList.sampleFactorList(4) );
-disp("computedSampleFactorList(4)");
-disp( computedSampleFactorList(4) );
-disp("########################################");
-disp("sampleFactorList.sampleFactorList(5)");
-disp( sampleFactorList.sampleFactorList(5) );
-disp("computedSampleFactorList(5)");
-disp( computedSampleFactorList(5) );
-disp("########################################");
-disp("sampleFactorList.sampleFactorList(6)");
-disp( sampleFactorList.sampleFactorList(6) );
-disp("computedSampleFactorList(6)");
-disp( computedSampleFactorList(6) );
-disp("########################################");
-
+%disp("########################################");
+%disp("sampleFactorList");
+%disp( sampleFactorList );
+%disp("computedSampleFactorList");
+%disp( computedSampleFactorList );
+%disp("########################################");
+%disp("sampleFactorList.sampleFactorList(1)");
+%disp( sampleFactorList.sampleFactorList(1) );
+%disp("computedSampleFactorList(1)");
+%disp( computedSampleFactorList(1) );
+%disp("########################################");
+%disp("sampleFactorList.sampleFactorList(2)");
+%disp( sampleFactorList.sampleFactorList(2) );
+%disp("computedSampleFactorList(2)");
+%disp( computedSampleFactorList(2) );
+%disp("########################################");
+%disp("sampleFactorList.sampleFactorList(3)");
+%disp( sampleFactorList.sampleFactorList(3) );
+%disp("computedSampleFactorList(3)");
+%disp( computedSampleFactorList(3) );
+%disp("########################################");
+%disp("sampleFactorList.sampleFactorList(4)");
+%disp( sampleFactorList.sampleFactorList(4) );
+%disp("computedSampleFactorList(4)");
+%disp( computedSampleFactorList(4) );
+%disp("########################################");
+%disp("sampleFactorList.sampleFactorList(5)");
+%disp( sampleFactorList.sampleFactorList(5) );
+%disp("computedSampleFactorList(5)");
+%disp( computedSampleFactorList(5) );
+%disp("########################################");
+%disp("sampleFactorList.sampleFactorList(6)");
+%disp( sampleFactorList.sampleFactorList(6) );
+%disp("computedSampleFactorList(6)");
+%disp( computedSampleFactorList(6) );
+%disp("########################################");
 
 % Testing phenotypeGivenCopiesFactor:
 alphaListThree = [0.8; 0.6; 0.1; 0.5; 0.05; 0.01];
@@ -123,8 +122,15 @@ numAllelesThree = 3;
 genotypeVarMotherCopy = 1;
 genotypeVarFatherCopy = 2;
 phenotypeVar = 3;
-phenotypeFactorPar = struct('var', [3,1,2], 'card', [2,3,3], 'val', [0.8,0.2,0.6,0.4,0.1,0.9,0.6,0.4,0.5,0.5,0.05,0.95,0.1,0.9,0.05,0.95,0.01,0.99]); % Comment out this line for testing
-% phenotypeFactorPar = phenotypeGivenCopiesFactor(alphaListThree, numAllelesThree, genotypeVarMotherCopy, genotypeVarFatherCopy, phenotypeVar);
+phenotypeFactorPar         = struct('var', [3,1,2], 'card', [2,3,3], 'val', [0.8,0.2,0.6,0.4,0.1,0.9,0.6,0.4,0.5,0.5,0.05,0.95,0.1,0.9,0.05,0.95,0.01,0.99]);
+computedPhenotypeFactorPar = phenotypeGivenCopiesFactor(alphaListThree, numAllelesThree, genotypeVarMotherCopy, genotypeVarFatherCopy, phenotypeVar);
+
+disp("phenotypeFactorPar");
+disp( phenotypeFactorPar );
+disp("computedPhenotypeFactorPar");
+disp( computedPhenotypeFactorPar );
+disp("sum(abs(phenotypeFactorPar.val - computedPhenotypeFactorPar.val))");
+disp( sum(abs(phenotypeFactorPar.val - computedPhenotypeFactorPar.val)) );
 
 % Testing constructDecoupledGeneticNetwork:
 pedigree = struct('parents', [0,0;1,3;0,0]);
