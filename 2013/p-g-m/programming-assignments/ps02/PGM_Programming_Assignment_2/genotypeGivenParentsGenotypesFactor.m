@@ -60,41 +60,73 @@ genotypeFactor = struct('var', [], 'card', [], 'val', []);
 genotypeFactor.var = [genotypeVarChild genotypeVarParentOne genotypeVarParentTwo];
 
 % Fill in genotypeFactor.card.  This should be a 1-D row vector.
-numGenotypes = size(genotypesToAlleles,1);
+numGenotypes        = size(genotypesToAlleles,1);
 genotypeFactor.card = [numGenotypes numGenotypes numGenotypes];
 
 genotypeFactor.val = zeros(1, prod(genotypeFactor.card));
 % Replace the zeros in genotypeFactor.val with the correct values.
 
-temp = IndexToAssignment([1:length(genotypeFactor.val)],genotypeFactor.card);
+%temp = IndexToAssignment([1:length(genotypeFactor.val)],genotypeFactor.card);
 %disp("temp");
 %disp( temp );
+%for i = 1:length(genotypeFactor.val)
+%	%childGenotypeIndex   = temp(i,1);
+%	%parent1GenotypeIndex = temp(i,2);
+%	%parent2GenotypeIndex = temp(i,3);
+%
+%	childGenotype   = genotypesToAlleles(temp(i,1),:);
+%	parent1Genotype = genotypesToAlleles(temp(i,2),:);
+%	parent2Genotype = genotypesToAlleles(temp(i,3),:);
+%
+%	disp("########################")
+%	disp("i");
+%	disp( i );
+%
+%	disp("childGenotype");
+%	disp( childGenotype );
+%
+%	disp("parent1Genotype");
+%	disp( parent1Genotype );
+%
+%	disp("parent2Genotype");
+%	disp( parent2Genotype );
+%
+%	% continue;
+%end
 
-for i = 1:length(genotypeFactor.val)
-	%childGenotypeIndex   = temp(i,1);
-	%parent1GenotypeIndex = temp(i,2);
-	%parent2GenotypeIndex = temp(i,3);
+for p11 = 1:numAlleles
+for p12 = 1:numAlleles
+for p21 = 1:numAlleles
+for p22 = 1:numAlleles
 
-	childGenotype   = genotypesToAlleles(temp(i,1),:);
-	parent1Genotype = genotypesToAlleles(temp(i,2),:);
-	parent2Genotype = genotypesToAlleles(temp(i,3),:);
+	tempP1 = allelesToGenotypes(p11,p12);
+	tempP2 = allelesToGenotypes(p21,p22);
 
-	disp("########################")
-	disp("i");
-	disp( i );
+	disp("[p11 p12 p21 p22]");
+	disp( [p11 p21 p11 p12 p21 p22] );
+	tempC = allelesToGenotypes(p11,p21);
+	temp  = AssignmentToIndex([tempC tempP1 tempP2],genotypeFactor.card);
+	genotypeFactor.val(temp) = 1 + genotypeFactor.val(temp);
 
-	disp("childGenotype");
-	disp( childGenotype );
+	disp( [p11 p22 p11 p12 p21 p22] );
+	tempC = allelesToGenotypes(p11,p22);
+	temp  = AssignmentToIndex([tempC tempP1 tempP2],genotypeFactor.card);
+	genotypeFactor.val(temp) = 1 + genotypeFactor.val(temp);
 
-	disp("parent1Genotype");
-	disp( parent1Genotype );
+	disp( [p12 p21 p11 p12 p21 p22] );
+	tempC = allelesToGenotypes(p12,p21);
+	temp  = AssignmentToIndex([tempC tempP1 tempP2],genotypeFactor.card);
+	genotypeFactor.val(temp) = 1 + genotypeFactor.val(temp);
 
-	disp("parent2Genotype");
-	disp( parent2Genotype );
+	disp( [p12 p22 p11 p12 p21 p22] );
+	tempC = allelesToGenotypes(p12,p22);
+	temp  = AssignmentToIndex([tempC tempP1 tempP2],genotypeFactor.card);
+	genotypeFactor.val(temp) = 1 + genotypeFactor.val(temp);
 
-	% continue;
 end
-
+end
+end
+end
 
 genotypeFactor;
 return;
