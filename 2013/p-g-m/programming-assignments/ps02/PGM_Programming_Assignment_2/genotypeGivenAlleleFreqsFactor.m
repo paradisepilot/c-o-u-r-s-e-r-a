@@ -25,7 +25,7 @@ function genotypeFactor = genotypeGivenAlleleFreqsFactor(alleleFreqs, genotypeVa
 % homozygotes
 
 genotypeFactor = struct('var', [], 'card', [], 'val', []);
-numAlleles = length(alleleFreqs);
+numAlleles     = length(alleleFreqs);
 
 % Each allele has an ID that is the index of its allele frequency in the 
 % allele frequency list.  Each genotype also has an ID.  We need allele and
@@ -57,9 +57,22 @@ numAlleles = length(alleleFreqs);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Fill in genotypeFactor.var.  This should be a 1-D row vector.
+genotypeFactor.var = genotypeVar;
+
 % Fill in genotypeFactor.card.  This should be a 1-D row vector.
+genotypeFactor.card = size(genotypesToAlleles,1);
 
 genotypeFactor.val = zeros(1, prod(genotypeFactor.card));
-% Replace the zeros in genotypeFactor.val with the correct values.
+for i = 1:length(genotypeFactor.val)
+	if (0 == diff(genotypesToAlleles(i,:))) 
+		genotypeFactor.val(i) = prod(alleleFreqs(genotypesToAlleles(i,:)));
+	else
+		genotypeFactor.val(i) = 2 * prod(alleleFreqs(genotypesToAlleles(i,:)));
+	end
+end
+
+genotypeFactor;
+return;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+
