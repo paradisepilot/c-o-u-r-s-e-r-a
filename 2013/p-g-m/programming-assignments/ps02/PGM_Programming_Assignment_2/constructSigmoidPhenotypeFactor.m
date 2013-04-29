@@ -46,9 +46,38 @@ phenotypeFactor = struct('var', [], 'card', [], 'val', []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Fill in phenotypeFactor.var.  This should be a 1-D row vector.
-% Fill in phenotypeFactor.card.  This should be a 1-D row vector.
+phenotypeFactor.var = transpose([phenotypeVar ; geneCopyVarOneList ; geneCopyVarTwoList]);
 
-phenotypeFactor.val = zeros(1, prod(phenotypeFactor.card));
+% Fill in phenotypeFactor.card.  This should be a 1-D row vector.
+numGenes   = length(alleleWeights);
+numAlleles = zeros(1,numGenes);
+for i = 1:length(numAlleles)
+	numAlleles(i) = length(alleleWeights{i});
+end
+phenotypeFactor.card = [2 numAlleles numAlleles];
+
 % Replace the zeros in phentoypeFactor.val with the correct values.
+phenotypeFactor.val = zeros(1, prod(phenotypeFactor.card));
+
+myDataFrame = IndexToAssignment([1:length(phenotypeFactor.val)],phenotypeFactor.card);
+for i = 1:length(phenotypeFactor.val)
+	temp = 0;
+	for g = 1:numGenes
+		for k = 1:numAlleles(g)
+			temp = temp + alleleWeights{g}(k) * (k == myDataFrame(i,1+g));
+			temp = temp + alleleWeights{g}(k) * (k == myDataFrame(i,1+g+numGenes));
+		end
+	end
+	if (1 == myDataFrame(i,1))
+		phenotypeFactor.val(i) = exp(temp) / (1 + exp(temp));
+	else
+		phenotypeFactor.val(i) = 1 - exp(temp) / (1 + exp(temp));
+	end
+
+end
+
+phenotypeFactor;
+return;
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
