@@ -53,7 +53,7 @@ numAlleles = 2;
 genotypeVarChild = 3;
 genotypeVarParentOne = 1;
 genotypeVarParentTwo = 2;
-genotypeFactorPar         = struct('var', [3,1,2], 'card', [3,3,3], 'val', [1,0,0,0.5,0.5,0,0,1,0,0.5,0.5,0,0.25,0.5,0.25,0,0.5,0.5,0,1,0,0,0.5,0.5,0,0,1]); % Comment out this line for testing
+genotypeFactorPar         = struct('var', [3,1,2], 'card', [3,3,3], 'val', [1,0,0,0.5,0.5,0,0,1,0,0.5,0.5,0,0.25,0.5,0.25,0,0.5,0.5,0,1,0,0,0.5,0.5,0,0,1]);
 computedGenotypeFactorPar = genotypeGivenParentsGenotypesFactor(numAlleles, genotypeVarChild, genotypeVarParentOne, genotypeVarParentTwo);
 
 %disp("genotypeFactorPar");
@@ -76,7 +76,8 @@ pedigree = struct('parents', [0,0;1,3;0,0]);
 pedigree.names = {'Ira','James','Robin'};
 alleleFreqs = [0.1; 0.9];
 alphaList = [0.8; 0.6; 0.1];
-sampleFactorList         = load('sampleFactorList.mat'); % Comment out this line for testing
+%sampleFactorList         = load('sampleFactorList.mat'); % Comment out this line for testing
+load('sampleFactorList.mat'); % Comment out this line for testing
 computedSampleFactorList = constructGeneticNetwork(pedigree, alleleFreqs, alphaList);
 
 %disp("########################################");
@@ -125,6 +126,9 @@ phenotypeVar = 3;
 phenotypeFactorPar         = struct('var', [3,1,2], 'card', [2,3,3], 'val', [0.8,0.2,0.6,0.4,0.1,0.9,0.6,0.4,0.5,0.5,0.05,0.95,0.1,0.9,0.05,0.95,0.01,0.99]);
 computedPhenotypeFactorPar = phenotypeGivenCopiesFactor(alphaListThree, numAllelesThree, genotypeVarMotherCopy, genotypeVarFatherCopy, phenotypeVar);
 
+disp("length(phenotypeFactorPar.val)");
+disp( length(phenotypeFactorPar.val) );
+
 %disp("phenotypeFactorPar");
 %disp( phenotypeFactorPar );
 %disp("computedPhenotypeFactorPar");
@@ -141,15 +145,15 @@ alphaListThree = [0.8; 0.6; 0.1; 0.5; 0.05; 0.01];
 load('sampleFactorListDecoupled.mat');
 computedSampleFactorListDecoupled = constructDecoupledGeneticNetwork(pedigree, alleleFreqsThree, alphaListThree);
 
-%for i = 1:length(sampleFactorListDecoupled)
-%	disp("########################################");
-%	disp(strcat("sampleFactorListDecoupled(",int2str(i),")"));
-%	disp( sampleFactorListDecoupled(i) );
-%	disp(strcat("computedSampleFactorListDecoupled(",int2str(i),")"));
-%	disp( computedSampleFactorListDecoupled(i) );
-%	disp("sum(abs(sampleFactorListDecoupled(i).val - computedSampleFactorListDecoupled(i).val ))");
-%	disp( sum(abs(sampleFactorListDecoupled(i).val - computedSampleFactorListDecoupled(i).val )) );
-%end
+for i = 1:length(sampleFactorListDecoupled)
+	disp("########################################");
+	%disp(strcat("sampleFactorListDecoupled(",int2str(i),")"));
+	%disp( sampleFactorListDecoupled(i) );
+	disp(strcat("computedSampleFactorListDecoupled(",int2str(i),")"));
+	disp( computedSampleFactorListDecoupled(i) );
+	%disp("sum(abs(sampleFactorListDecoupled(i).val - computedSampleFactorListDecoupled(i).val ))");
+	%disp( sum(abs(sampleFactorListDecoupled(i).val - computedSampleFactorListDecoupled(i).val )) );
+end
 
 % Testing constructSigmoidPhenotypeFactor:
 alleleWeights = {[3, -3], [0.9, -0.8]};
@@ -159,10 +163,10 @@ phenotypeVar = 3;
 phenotypeFactorSigmoid = struct('var', [3,1,2,4,5], 'card', [2,2,2,2,2], 'val', [0.999590432835014,0.000409567164986080,0.858148935099512,0.141851064900488,0.997762151478724,0.00223784852127629,0.524979187478940,0.475020812521060,0.858148935099512,0.141851064900488,0.0147740316932731,0.985225968306727,0.524979187478940,0.475020812521060,0.00273196076301106,0.997268039236989,0.997762151478724,0.00223784852127629,0.524979187478940,0.475020812521060,0.987871565015726,0.0121284349842742,0.167981614866076,0.832018385133925,0.524979187478940,0.475020812521060,0.00273196076301106,0.997268039236989,0.167981614866076,0.832018385133925,0.000500201107079564,0.999499798892920]);  % Comment out this line for testing
 computedPhenotypeFactorSigmoid = constructSigmoidPhenotypeFactor(alleleWeights, geneCopyVarParentOneList, geneCopyVarParentTwoList, phenotypeVar);
 
-disp("phenotypeFactorSigmoid");
-disp( phenotypeFactorSigmoid );
-disp("computedPhenotypeFactorSigmoid");
-disp( computedPhenotypeFactorSigmoid );
-disp("sum(abs(phenotypeFactorSigmoid.val - computedPhenotypeFactorSigmoid.val))");
-disp( sum(abs(phenotypeFactorSigmoid.val - computedPhenotypeFactorSigmoid.val)) );
+%disp("phenotypeFactorSigmoid");
+%disp( phenotypeFactorSigmoid );
+%disp("computedPhenotypeFactorSigmoid");
+%disp( computedPhenotypeFactorSigmoid );
+%disp("sum(abs(phenotypeFactorSigmoid.val - computedPhenotypeFactorSigmoid.val))");
+%disp( sum(abs(phenotypeFactorSigmoid.val - computedPhenotypeFactorSigmoid.val)) );
 
