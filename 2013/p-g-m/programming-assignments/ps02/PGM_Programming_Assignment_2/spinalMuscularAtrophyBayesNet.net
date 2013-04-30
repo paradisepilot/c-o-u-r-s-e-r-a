@@ -1,185 +1,257 @@
 net
 {
-	node_size = (90 36);
-}
-
-node IraParent1Gene1Copy
-{
-	lablel = "IraParent1Gene1Copy";
-	position = (1040 400);
-	states = ("M" "m");
-}
-
-node IraParent1Gene2Copy
-{
-	lablel = "IraParent1Gene2Copy";
-	position = (1170 400);
-	states = ("B" "b");
-}
-
-node IraParent2Gene1Copy
-{
-	lablel = "IraParent2Gene1Copy";
-	position = (1300 400);
-	states = ("M" "m");
-}
-
-node IraParent2Gene2Copy
-{
-	lablel = "IraParent2Gene2Copy";
-	position = (1430 400);
-	states = ("B" "b");
+	node_size = (90.0 36.0);
 }
 
 node IraPhenotype
 {
+	states = ("SpinalMuscularAtrophy" "NoSpinalMuscularAtrophy" );
+	position = (4 241);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
 	lablel = "IraPhenotype";
-	position = (1235 300);
-	states = ("SpinalMuscularAtrophy" "NoSpinalMuscularAtrophy");
+	diagnosistype = "AUXILIARY";
 }
-
-node JamesParent1Gene1Copy
-{
-	lablel = "JamesParent1Gene1Copy";
-	position = (520 200);
-	states = ("M" "m");
-}
-
-node JamesParent1Gene2Copy
-{
-	lablel = "JamesParent1Gene2Copy";
-	position = (650 200);
-	states = ("B" "b");
-}
-
-node JamesParent2Gene1Copy
-{
-	lablel = "JamesParent2Gene1Copy";
-	position = (780 200);
-	states = ("M" "m");
-}
-
-node JamesParent2Gene2Copy
-{
-	lablel = "JamesParent2Gene2Copy";
-	position = (910 200);
-	states = ("B" "b");
-}
-
-node JamesPhenotype
-{
-	lablel = "JamesPhenotype";
-	position = (705 100);
-	states = ("SpinalMuscularAtrophy" "NoSpinalMuscularAtrophy");
-}
-
 node RobinParent1Gene1Copy
 {
+	states = ("M" "m" );
+	position = (604 396);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
 	lablel = "RobinParent1Gene1Copy";
-	position = (0 400);
-	states = ("M" "m");
+	diagnosistype = "AUXILIARY";
 }
-
-node RobinParent1Gene2Copy
-{
-	lablel = "RobinParent1Gene2Copy";
-	position = (130 400);
-	states = ("B" "b");
-}
-
-node RobinParent2Gene1Copy
-{
-	lablel = "RobinParent2Gene1Copy";
-	position = (260 400);
-	states = ("M" "m");
-}
-
 node RobinParent2Gene2Copy
 {
+	states = ("B" "b" );
+	position = (1014 394);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
 	lablel = "RobinParent2Gene2Copy";
-	position = (390 400);
-	states = ("B" "b");
+	diagnosistype = "AUXILIARY";
 }
-
+node IraParent2Gene1Copy
+{
+	states = ("M" "m" );
+	position = (137 395);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "IraParent2Gene1Copy";
+	diagnosistype = "AUXILIARY";
+}
+node JamesParent2Gene1Copy
+{
+	states = ("M" "m" );
+	position = (600 83);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "JamesParent2Gene1Copy";
+	diagnosistype = "AUXILIARY";
+}
+node JamesParent1Gene1Copy
+{
+	states = ("M" "m" );
+	position = (339 82);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "JamesParent1Gene1Copy";
+	diagnosistype = "AUXILIARY";
+}
+node JamesParent1Gene2Copy
+{
+	states = ("B" "b" );
+	position = (468 82);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "JamesParent1Gene2Copy";
+	diagnosistype = "AUXILIARY";
+}
+node IraParent1Gene1Copy
+{
+	states = ("M" "m" );
+	position = (3 394);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "IraParent1Gene1Copy";
+	diagnosistype = "AUXILIARY";
+}
+node IraParent2Gene2Copy
+{
+	states = ("B" "b" );
+	position = (402 392);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "IraParent2Gene2Copy";
+	diagnosistype = "AUXILIARY";
+}
+node JamesPhenotype
+{
+	states = ("SpinalMuscularAtrophy" "NoSpinalMuscularAtrophy" );
+	position = (543 -121);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "JamesPhenotype";
+	diagnosistype = "AUXILIARY";
+}
 node RobinPhenotype
 {
+	states = ("SpinalMuscularAtrophy" "NoSpinalMuscularAtrophy" );
+	position = (1022 229);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
 	lablel = "RobinPhenotype";
-	position = (195 300);
-	states = ("SpinalMuscularAtrophy" "NoSpinalMuscularAtrophy");
+	diagnosistype = "AUXILIARY";
 }
-
-potential (IraParent1Gene1Copy |)
+node JamesParent2Gene2Copy
 {
-	data = (0.200000 0.800000);
+	states = ("B" "b" );
+	position = (730 85);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "JamesParent2Gene2Copy";
+	diagnosistype = "AUXILIARY";
 }
-
-potential (IraParent1Gene2Copy |)
+node RobinParent2Gene1Copy
 {
-	data = (0.300000 0.700000);
+	states = ("M" "m" );
+	position = (737 400);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "RobinParent2Gene1Copy";
+	diagnosistype = "AUXILIARY";
 }
-
-potential (IraParent2Gene1Copy |)
+node RobinParent1Gene2Copy
 {
-	data = (0.200000 0.800000);
+	states = ("B" "b" );
+	position = (873 396);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "RobinParent1Gene2Copy";
+	diagnosistype = "AUXILIARY";
 }
-
-potential (IraParent2Gene2Copy |)
+node IraParent1Gene2Copy
 {
-	data = (0.300000 0.700000);
+	states = ("B" "b" );
+	position = (271 393);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	lablel = "IraParent1Gene2Copy";
+	diagnosistype = "AUXILIARY";
 }
-
-potential (IraPhenotype | IraParent1Gene1Copy IraParent1Gene2Copy IraParent2Gene1Copy IraParent2Gene2Copy)
+potential ( IraPhenotype | IraParent1Gene1Copy IraParent1Gene2Copy IraParent2Gene1Copy IraParent2Gene2Copy )
 {
-	data = (0.999590 0.000410 0.858149 0.141851 0.997762 0.002238 0.524979 0.475021 0.858149 0.141851 0.014774 0.985226 0.524979 0.475021 0.002732 0.997268 0.997762 0.002238 0.524979 0.475021 0.987872 0.012128 0.167982 0.832018 0.524979 0.475021 0.002732 0.997268 0.167982 0.832018 0.000500 0.999500);
+	data = (((((	0.99959	4.1E-4	)
+		(	0.858149	0.141851	))
+		((	0.997762	0.002238	)
+		(	0.524979	0.475021	)))
+		(((	0.858149	0.141851	)
+		(	0.014774	0.985226	))
+		((	0.524979	0.475021	)
+		(	0.002732	0.997268	))))
+		((((	0.997762	0.002238	)
+		(	0.524979	0.475021	))
+		((	0.987872	0.012128	)
+		(	0.167982	0.832018	)))
+		(((	0.524979	0.475021	)
+		(	0.002732	0.997268	))
+		((	0.167982	0.832018	)
+		(	5.0E-4	0.9995	)))));
 }
-
-potential (JamesParent1Gene1Copy | IraParent1Gene1Copy IraParent2Gene1Copy)
+potential ( RobinParent1Gene1Copy | )
 {
-	data = (1.000000 0.000000 0.500000 0.500000 0.500000 0.500000 0.000000 1.000000);
+	data = (	0.2	0.8	);
 }
-
-potential (JamesParent1Gene2Copy | IraParent1Gene2Copy IraParent2Gene2Copy)
+potential ( RobinParent2Gene2Copy | )
 {
-	data = (1.000000 0.000000 0.500000 0.500000 0.500000 0.500000 0.000000 1.000000);
+	data = (	0.3	0.7	);
 }
-
-potential (JamesParent2Gene1Copy | RobinParent1Gene1Copy RobinParent2Gene1Copy)
+potential ( IraParent2Gene1Copy | )
 {
-	data = (1.000000 0.000000 0.500000 0.500000 0.500000 0.500000 0.000000 1.000000);
+	data = (	0.2	0.8	);
 }
-
-potential (JamesParent2Gene2Copy | RobinParent1Gene2Copy RobinParent2Gene2Copy)
+potential ( JamesParent2Gene1Copy | RobinParent1Gene1Copy RobinParent2Gene1Copy )
 {
-	data = (1.000000 0.000000 0.500000 0.500000 0.500000 0.500000 0.000000 1.000000);
+	data = (((	1.0	0.0	)
+		(	0.5	0.5	))
+		((	0.5	0.5	)
+		(	0.0	1.0	)));
 }
-
-potential (JamesPhenotype | JamesParent1Gene1Copy JamesParent1Gene2Copy JamesParent2Gene1Copy JamesParent2Gene2Copy)
+potential ( JamesParent1Gene1Copy | IraParent1Gene1Copy IraParent2Gene1Copy )
 {
-	data = (0.999590 0.000410 0.858149 0.141851 0.997762 0.002238 0.524979 0.475021 0.858149 0.141851 0.014774 0.985226 0.524979 0.475021 0.002732 0.997268 0.997762 0.002238 0.524979 0.475021 0.987872 0.012128 0.167982 0.832018 0.524979 0.475021 0.002732 0.997268 0.167982 0.832018 0.000500 0.999500);
+	data = (((	1.0	0.0	)
+		(	0.5	0.5	))
+		((	0.5	0.5	)
+		(	0.0	1.0	)));
 }
-
-potential (RobinParent1Gene1Copy |)
+potential ( JamesParent1Gene2Copy | IraParent1Gene2Copy IraParent2Gene2Copy )
 {
-	data = (0.200000 0.800000);
+	data = (((	1.0	0.0	)
+		(	0.5	0.5	))
+		((	0.5	0.5	)
+		(	0.0	1.0	)));
 }
-
-potential (RobinParent1Gene2Copy |)
+potential ( IraParent1Gene1Copy | )
 {
-	data = (0.300000 0.700000);
+	data = (	0.2	0.8	);
 }
-
-potential (RobinParent2Gene1Copy |)
+potential ( IraParent2Gene2Copy | )
 {
-	data = (0.200000 0.800000);
+	data = (	0.3	0.7	);
 }
-
-potential (RobinParent2Gene2Copy |)
+potential ( JamesPhenotype | JamesParent1Gene1Copy JamesParent1Gene2Copy JamesParent2Gene1Copy JamesParent2Gene2Copy )
 {
-	data = (0.300000 0.700000);
+	data = (((((	0.99959	4.1E-4	)
+		(	0.858149	0.141851	))
+		((	0.997762	0.002238	)
+		(	0.524979	0.475021	)))
+		(((	0.858149	0.141851	)
+		(	0.014774	0.985226	))
+		((	0.524979	0.475021	)
+		(	0.002732	0.997268	))))
+		((((	0.997762	0.002238	)
+		(	0.524979	0.475021	))
+		((	0.987872	0.012128	)
+		(	0.167982	0.832018	)))
+		(((	0.524979	0.475021	)
+		(	0.002732	0.997268	))
+		((	0.167982	0.832018	)
+		(	5.0E-4	0.9995	)))));
 }
-
-potential (RobinPhenotype | RobinParent1Gene1Copy RobinParent1Gene2Copy RobinParent2Gene1Copy RobinParent2Gene2Copy)
+potential ( RobinPhenotype | RobinParent1Gene1Copy RobinParent1Gene2Copy RobinParent2Gene1Copy RobinParent2Gene2Copy )
 {
-	data = (0.999590 0.000410 0.858149 0.141851 0.997762 0.002238 0.524979 0.475021 0.858149 0.141851 0.014774 0.985226 0.524979 0.475021 0.002732 0.997268 0.997762 0.002238 0.524979 0.475021 0.987872 0.012128 0.167982 0.832018 0.524979 0.475021 0.002732 0.997268 0.167982 0.832018 0.000500 0.999500);
+	data = (((((	0.99959	4.1E-4	)
+		(	0.858149	0.141851	))
+		((	0.997762	0.002238	)
+		(	0.524979	0.475021	)))
+		(((	0.858149	0.141851	)
+		(	0.014774	0.985226	))
+		((	0.524979	0.475021	)
+		(	0.002732	0.997268	))))
+		((((	0.997762	0.002238	)
+		(	0.524979	0.475021	))
+		((	0.987872	0.012128	)
+		(	0.167982	0.832018	)))
+		(((	0.524979	0.475021	)
+		(	0.002732	0.997268	))
+		((	0.167982	0.832018	)
+		(	5.0E-4	0.9995	)))));
 }
-
+potential ( JamesParent2Gene2Copy | RobinParent1Gene2Copy RobinParent2Gene2Copy )
+{
+	data = (((	1.0	0.0	)
+		(	0.5	0.5	))
+		((	0.5	0.5	)
+		(	0.0	1.0	)));
+}
+potential ( RobinParent2Gene1Copy | )
+{
+	data = (	0.2	0.8	);
+}
+potential ( RobinParent1Gene2Copy | )
+{
+	data = (	0.3	0.7	);
+}
+potential ( IraParent1Gene2Copy | )
+{
+	data = (	0.3	0.7	);
+}
