@@ -22,25 +22,18 @@
 
 function result = PA3Test()
 
-	models = load('PA3Models.mat');
+	models  = load('PA3Models.mat');
 	samples = load('PA3SampleCases.mat');
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 	disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
-	%disp("models");
-	%disp( models );
-
 	temp = printSamples(samples, models);
-
 	disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	ok = true;
 	%for test = 1:6
-	for test = 1:3
+	for test = 1:5
 		if ~ok
 			continue;
 		end
@@ -62,7 +55,7 @@ function result = PA3Test()
 		case 4
 			images = samples.Part4SampleImagesInput;
 			factor = ComputeSimilarityFactor(images, models.imageModel.K, 1, 2);
-			ok = checkResult('ComputeSimilarityFactors', samples.Part4SampleFactorOutput, SortFactorVars(factor), factor);
+			ok     = checkResult('ComputeSimilarityFactors', samples.Part4SampleFactorOutput, SortFactorVars(factor), factor);
 		case 5
 			images = samples.Part5SampleImagesInput;
 			factors = ComputeAllSimilarityFactors(images, models.imageModel.K);
@@ -81,46 +74,47 @@ end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function f = SortAllFactors(factors)
  
-for i = 1:length(factors)
-factors(i) = SortFactorVars(factors(i));
+	for i = 1:length(factors)
+		factors(i) = SortFactorVars(factors(i));
+	end
+ 
+	varMat = vertcat(factors(:).var);
+	[unused, order] = sortrows(varMat);
+ 
+	f = factors(order);
+ 
 end
- 
-varMat = vertcat(factors(:).var);
-[unused, order] = sortrows(varMat);
- 
-f = factors(order);
- 
-end
+
 function G = SortFactorVars(F)
  
-[sortedVars, order] = sort(F.var);
-G.var = sortedVars;
+	[sortedVars, order] = sort(F.var);
+	G.var = sortedVars;
  
-G.card = F.card(order);
-G.val = zeros(numel(F.val), 1);
+	G.card = F.card(order);
+	G.val = zeros(numel(F.val), 1);
  
-assignmentsInF = IndexToAssignment(1:numel(F.val), F.card);
-assignmentsInG = assignmentsInF(:,order);
-G.val(AssignmentToIndex(assignmentsInG, G.card)) = F.val;
+	assignmentsInF = IndexToAssignment(1:numel(F.val), F.card);
+	assignmentsInG = assignmentsInF(:,order);
+	G.val(AssignmentToIndex(assignmentsInG, G.card)) = F.val;
  
 end
  
 function res = checkResult(label, expected, sorted, raw)
-fprintf('%s ...\n', label);
-params = struct('displaycontextprogress', 0, 'NumericTolerance', 1e-6);
-cmp = comparedata(expected, sorted, [], params);
-if cmp
-rawCmp = comparedata(expected, raw, [], params);
-if rawCmp
-fprintf('%s: OK\n', label);
-else
-fprintf('%s: ok with warnings\n', label);
-end
-res = true;
-else
-fprintf('%s: FAIL\n', label);
-res = false
-end
+	fprintf('%s ...\n', label);
+	params = struct('displaycontextprogress', 0, 'NumericTolerance', 1e-6);
+	cmp = comparedata(expected, sorted, [], params);
+	if cmp
+		rawCmp = comparedata(expected, raw, [], params);
+		if rawCmp
+			fprintf('%s: OK\n', label);
+		else
+			fprintf('%s: ok with warnings\n', label);
+		end
+		res = true;
+	else
+		fprintf('%s: FAIL\n', label);
+		res = false
+	end
 end
 
 %%%%%%%%%%%%%%%%
@@ -132,30 +126,26 @@ function returnValue = printSamples(samples, models)
 	%disp("samples");
 	%disp( samples );
 
-	tempAssignments  = zeros(length(tripletList),3);
-	tempFactorValues = zeros(length(tripletList),1);
-	for i = 1:length(tripletList)
-		tempAssignments(i,:) = tripletList(i).chars;
-		tempFactorValues(i)  = tripletList(i).factorVal;
+	disp("samples.Part5SampleFactorsOutput");
+	disp( samples.Part5SampleFactorsOutput );
+
+	%disp("samples.Part5SampleFactorsOutput(1).var");
+	%disp( samples.Part5SampleFactorsOutput(1).var );
+
+	%disp("samples.Part5SampleFactorsOutput(1).card");
+	%disp( samples.Part5SampleFactorsOutput(1).card );
+
+	for n = 1:length(samples.Part5SampleFactorsOutput)
+		disp(strcat("samples.Part5SampleFactorsOutput(",int2str(n),").var"));
+		disp( samples.Part5SampleFactorsOutput(n).var );
 	end
-	%disp("tempAssignments");
-	%disp( tempAssignments );
 
-	tempIndexes = AssignmentToIndex(tempAssignments,[K K K]);
-	disp("tempIndexes");
-	disp( tempIndexes );
+	for n = 1:length(samples.Part5SampleFactorsOutput)
+		disp(strcat("samples.Part5SampleFactorsOutput(",int2str(n),").card"));
+		disp( samples.Part5SampleFactorsOutput(n).card );
+	end
 
-	tempVal = ones(K^3,1);
-	tempVal(tempIndexes) = tempFactorValues;
-
-	disp("samples.Part3SampleFactorsOutput");
-	disp( samples.Part3SampleFactorsOutput );
-
-	disp("samples.Part3SampleFactorsOutput(1).var");
-	disp( samples.Part3SampleFactorsOutput(1).var );
-
-	disp("samples.Part3SampleFactorsOutput(1).card");
-	disp( samples.Part3SampleFactorsOutput(1).card );
+	return;
 
 	disp("samples.Part3SampleFactorsOutput(2).var");
 	disp( samples.Part3SampleFactorsOutput(2).var );
