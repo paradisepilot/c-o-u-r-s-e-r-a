@@ -22,5 +22,20 @@ factor = struct('var', [], 'card', [], 'val', []);
 
 % Your code here:
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+factor.var  = [i j];
+factor.card = [K K];
+factor.val  = ones(K^2,1);
+
+tempAlignments = zeros(K,2);
+for n = 1:K
+	tempAlignments(n,:) = [n n];
+end
+tempIndexes = AssignmentToIndex(tempAlignments,[K K]);
+
+factor.val(tempIndexes) = repmat(ImageSimilarity(images(i).img,images(j).img),[K 1]);
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 end
 
