@@ -19,48 +19,88 @@
 %
 % If you call PA3Test, it will always run all tests in sequence until the
 % first test fails.
+
 function result = PA3Test()
-models = load('PA3Models.mat');
-samples = load('PA3SampleCases.mat');
+
+	models = load('PA3Models.mat');
+	samples = load('PA3SampleCases.mat');
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+	%disp("models");
+	%disp( models );
+
+	%disp("samples");
+	%disp( samples );
+
+	disp("samples.Part1SampleFactorsOutput");
+	disp( samples.Part1SampleFactorsOutput );
+
+	disp("samples.Part1SampleFactorsOutput(1).var");
+	disp( samples.Part1SampleFactorsOutput(1).var );
+
+	disp("samples.Part1SampleFactorsOutput(1).card");
+	disp( samples.Part1SampleFactorsOutput(1).card );
+
+	disp("samples.Part1SampleFactorsOutput(1).val");
+	disp( samples.Part1SampleFactorsOutput(1).val );
+
+	disp("samples.Part1SampleFactorsOutput(2).var");
+	disp( samples.Part1SampleFactorsOutput(2).var );
+
+	disp("samples.Part1SampleFactorsOutput(2).card");
+	disp( samples.Part1SampleFactorsOutput(2).card );
+
+	disp("samples.Part1SampleFactorsOutput(2).val");
+	disp( samples.Part1SampleFactorsOutput(2).val );
+
+	disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+	ok = true;
+	%for test = 1:6
+	for test = 1:1
+		if ~ok
+			continue;
+		end
  
-ok = true;
-for test = 1:6
-if ~ok
-continue;
+		switch test
+		case 1
+			images  = samples.Part1SampleImagesInput;
+			factors = ComputeSingletonFactors(images, models.imageModel);
+			ok      = checkResult('ComputeSingletonFactors', samples.Part1SampleFactorsOutput, SortAllFactors(factors), factors);
+		case 2
+			images = samples.Part2SampleImagesInput;
+			factors = ComputePairwiseFactors(images, models.pairwiseModel, models.imageModel.K);
+			ok = checkResult('ComputePairwiseFactors', samples.Part2SampleFactorsOutput, SortAllFactors(factors), factors);
+		case 3
+			images = samples.Part3SampleImagesInput;
+			factors = ComputeTripletFactors(images, models.tripletList, models.imageModel.K);
+			factors = SortAllFactors(factors);
+			ok = checkResult('ComputeTripletFactors', samples.Part3SampleFactorsOutput, SortAllFactors(factors), factors);
+		case 4
+			images = samples.Part4SampleImagesInput;
+			factor = ComputeSimilarityFactor(images, models.imageModel.K, 1, 2);
+			ok = checkResult('ComputeSimilarityFactors', samples.Part4SampleFactorOutput, SortFactorVars(factor), factor);
+		case 5
+			images = samples.Part5SampleImagesInput;
+			factors = ComputeAllSimilarityFactors(images, models.imageModel.K);
+			factors = SortAllFactors(factors);
+			ok = checkResult('ComputeAllSimilarityFactors', samples.Part5SampleFactorsOutput, SortAllFactors(factors), factors);
+		case 6
+			allFactors = samples.Part6SampleFactorsInput;
+			factors = ChooseTopSimilarityFactors(allFactors, 2);
+			factors = SortAllFactors(factors);
+			ok = checkResult('ChooseTopSimilarityFactors', samples.Part6SampleFactorsOutput, SortAllFactors(factors), factors);
+		end
+	end
+
 end
- 
-switch test
-case 1
-images = samples.Part1SampleImagesInput;
-factors = ComputeSingletonFactors(images, models.imageModel);
-ok = checkResult('ComputeSingletonFactors', samples.Part1SampleFactorsOutput, SortAllFactors(factors), factors);
-case 2
-images = samples.Part2SampleImagesInput;
-factors = ComputePairwiseFactors(images, models.pairwiseModel, models.imageModel.K);
-ok = checkResult('ComputePairwiseFactors', samples.Part2SampleFactorsOutput, SortAllFactors(factors), factors);
-case 3
-images = samples.Part3SampleImagesInput;
-factors = ComputeTripletFactors(images, models.tripletList, models.imageModel.K);
-factors = SortAllFactors(factors);
-ok = checkResult('ComputeTripletFactors', samples.Part3SampleFactorsOutput, SortAllFactors(factors), factors);
-case 4
-images = samples.Part4SampleImagesInput;
-factor = ComputeSimilarityFactor(images, models.imageModel.K, 1, 2);
-ok = checkResult('ComputeSimilarityFactors', samples.Part4SampleFactorOutput, SortFactorVars(factor), factor);
-case 5
-images = samples.Part5SampleImagesInput;
-factors = ComputeAllSimilarityFactors(images, models.imageModel.K);
-factors = SortAllFactors(factors);
-ok = checkResult('ComputeAllSimilarityFactors', samples.Part5SampleFactorsOutput, SortAllFactors(factors), factors);
-case 6
-allFactors = samples.Part6SampleFactorsInput;
-factors = ChooseTopSimilarityFactors(allFactors, 2);
-factors = SortAllFactors(factors);
-ok = checkResult('ChooseTopSimilarityFactors', samples.Part6SampleFactorsOutput, SortAllFactors(factors), factors);
-end
-end
-end
- 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 function f = SortAllFactors(factors)
  
 for i = 1:length(factors)
