@@ -32,29 +32,7 @@ function result = PA3Test()
 	%disp("models");
 	%disp( models );
 
-	%disp("samples");
-	%disp( samples );
-
-	disp("samples.Part1SampleFactorsOutput");
-	disp( samples.Part1SampleFactorsOutput );
-
-	disp("samples.Part1SampleFactorsOutput(1).var");
-	disp( samples.Part1SampleFactorsOutput(1).var );
-
-	disp("samples.Part1SampleFactorsOutput(1).card");
-	disp( samples.Part1SampleFactorsOutput(1).card );
-
-	disp("samples.Part1SampleFactorsOutput(1).val");
-	disp( samples.Part1SampleFactorsOutput(1).val );
-
-	disp("samples.Part1SampleFactorsOutput(2).var");
-	disp( samples.Part1SampleFactorsOutput(2).var );
-
-	disp("samples.Part1SampleFactorsOutput(2).card");
-	disp( samples.Part1SampleFactorsOutput(2).card );
-
-	disp("samples.Part1SampleFactorsOutput(2).val");
-	disp( samples.Part1SampleFactorsOutput(2).val );
+	temp = printSamples(samples, models);
 
 	disp("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
 
@@ -62,7 +40,7 @@ function result = PA3Test()
 
 	ok = true;
 	%for test = 1:6
-	for test = 1:1
+	for test = 1:3
 		if ~ok
 			continue;
 		end
@@ -73,14 +51,14 @@ function result = PA3Test()
 			factors = ComputeSingletonFactors(images, models.imageModel);
 			ok      = checkResult('ComputeSingletonFactors', samples.Part1SampleFactorsOutput, SortAllFactors(factors), factors);
 		case 2
-			images = samples.Part2SampleImagesInput;
+			images  = samples.Part2SampleImagesInput;
 			factors = ComputePairwiseFactors(images, models.pairwiseModel, models.imageModel.K);
-			ok = checkResult('ComputePairwiseFactors', samples.Part2SampleFactorsOutput, SortAllFactors(factors), factors);
+			ok      = checkResult('ComputePairwiseFactors', samples.Part2SampleFactorsOutput, SortAllFactors(factors), factors);
 		case 3
-			images = samples.Part3SampleImagesInput;
+			images  = samples.Part3SampleImagesInput;
 			factors = ComputeTripletFactors(images, models.tripletList, models.imageModel.K);
 			factors = SortAllFactors(factors);
-			ok = checkResult('ComputeTripletFactors', samples.Part3SampleFactorsOutput, SortAllFactors(factors), factors);
+			ok      = checkResult('ComputeTripletFactors', samples.Part3SampleFactorsOutput, SortAllFactors(factors), factors);
 		case 4
 			images = samples.Part4SampleImagesInput;
 			factor = ComputeSimilarityFactor(images, models.imageModel.K, 1, 2);
@@ -143,5 +121,76 @@ else
 fprintf('%s: FAIL\n', label);
 res = false
 end
+end
+
+%%%%%%%%%%%%%%%%
+function returnValue = printSamples(samples, models)
+
+	K           = models.imageModel.K;
+	tripletList = models.tripletList;
+
+	%disp("samples");
+	%disp( samples );
+
+	tempAssignments  = zeros(length(tripletList),3);
+	tempFactorValues = zeros(length(tripletList),1);
+	for i = 1:length(tripletList)
+		tempAssignments(i,:) = tripletList(i).chars;
+		tempFactorValues(i)  = tripletList(i).factorVal;
+	end
+	%disp("tempAssignments");
+	%disp( tempAssignments );
+
+	tempIndexes = AssignmentToIndex(tempAssignments,[K K K]);
+	disp("tempIndexes");
+	disp( tempIndexes );
+
+	tempVal = ones(K^3,1);
+	tempVal(tempIndexes) = tempFactorValues;
+
+	disp("samples.Part3SampleFactorsOutput");
+	disp( samples.Part3SampleFactorsOutput );
+
+	disp("samples.Part3SampleFactorsOutput(1).var");
+	disp( samples.Part3SampleFactorsOutput(1).var );
+
+	disp("samples.Part3SampleFactorsOutput(1).card");
+	disp( samples.Part3SampleFactorsOutput(1).card );
+
+	disp("samples.Part3SampleFactorsOutput(2).var");
+	disp( samples.Part3SampleFactorsOutput(2).var );
+
+	disp("samples.Part3SampleFactorsOutput(2).card");
+	disp( samples.Part3SampleFactorsOutput(2).card );
+
+	disp("samples.Part3SampleFactorsOutput(3).var");
+	disp( samples.Part3SampleFactorsOutput(3).var );
+
+	disp("samples.Part3SampleFactorsOutput(3).card");
+	disp( samples.Part3SampleFactorsOutput(3).card );
+
+	disp("length(samples.Part3SampleFactorsOutput(1).val)");
+	disp( length(samples.Part3SampleFactorsOutput(1).val) );
+
+	disp("length(samples.Part3SampleFactorsOutput(2).val)");
+	disp( length(samples.Part3SampleFactorsOutput(2).val) );
+
+	disp("length(samples.Part3SampleFactorsOutput(3).val)");
+	disp( length(samples.Part3SampleFactorsOutput(3).val) );
+
+	disp("sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(2).val))");
+	disp( sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(2).val)) );
+
+	disp("sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(3).val))");
+	disp( sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(3).val)) );
+
+	disp("sum(abs(samples.Part3SampleFactorsOutput(1).val - tempVal))");
+	disp( sum(abs(samples.Part3SampleFactorsOutput(1).val - tempVal)) );
+
+	%disp("samples.Part3SampleFactorsOutput(1).val");
+	%disp( samples.Part3SampleFactorsOutput(1).val );
+
+	returnValue = true;
+
 end
 
