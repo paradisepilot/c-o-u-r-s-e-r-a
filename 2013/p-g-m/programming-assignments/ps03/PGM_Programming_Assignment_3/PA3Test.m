@@ -32,8 +32,7 @@ function result = PA3Test()
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 	ok = true;
-	%for test = 1:6
-	for test = 1:5
+	for test = 1:6
 		if ~ok
 			continue;
 		end
@@ -57,17 +56,20 @@ function result = PA3Test()
 			factor = ComputeSimilarityFactor(images, models.imageModel.K, 1, 2);
 			ok     = checkResult('ComputeSimilarityFactors', samples.Part4SampleFactorOutput, SortFactorVars(factor), factor);
 		case 5
-			images = samples.Part5SampleImagesInput;
+			images  = samples.Part5SampleImagesInput;
 			factors = ComputeAllSimilarityFactors(images, models.imageModel.K);
 			factors = SortAllFactors(factors);
-			ok = checkResult('ComputeAllSimilarityFactors', samples.Part5SampleFactorsOutput, SortAllFactors(factors), factors);
+			ok      = checkResult('ComputeAllSimilarityFactors', samples.Part5SampleFactorsOutput, SortAllFactors(factors), factors);
 		case 6
 			allFactors = samples.Part6SampleFactorsInput;
-			factors = ChooseTopSimilarityFactors(allFactors, 2);
-			factors = SortAllFactors(factors);
-			ok = checkResult('ChooseTopSimilarityFactors', samples.Part6SampleFactorsOutput, SortAllFactors(factors), factors);
+			factors    = ChooseTopSimilarityFactors(allFactors, 2);
+			factors    = SortAllFactors(factors);
+			ok         = checkResult('ChooseTopSimilarityFactors', samples.Part6SampleFactorsOutput, SortAllFactors(factors), factors);
 		end
 	end
+
+	result = true;
+	return;
 
 end
 
@@ -123,64 +125,21 @@ function returnValue = printSamples(samples, models)
 	K           = models.imageModel.K;
 	tripletList = models.tripletList;
 
-	%disp("samples");
-	%disp( samples );
+	disp("samples.Part6SampleFactorsOutput");
+	disp( samples.Part6SampleFactorsOutput );
 
-	disp("samples.Part5SampleFactorsOutput");
-	disp( samples.Part5SampleFactorsOutput );
-
-	%disp("samples.Part5SampleFactorsOutput(1).var");
-	%disp( samples.Part5SampleFactorsOutput(1).var );
-
-	%disp("samples.Part5SampleFactorsOutput(1).card");
-	%disp( samples.Part5SampleFactorsOutput(1).card );
-
-	for n = 1:length(samples.Part5SampleFactorsOutput)
-		disp(strcat("samples.Part5SampleFactorsOutput(",int2str(n),").var"));
-		disp( samples.Part5SampleFactorsOutput(n).var );
+	for n = 1:length(samples.Part6SampleFactorsOutput)
+		disp(strcat("samples.Part6SampleFactorsOutput(",int2str(n),").var"));
+		disp( samples.Part6SampleFactorsOutput(n).var );
 	end
 
-	for n = 1:length(samples.Part5SampleFactorsOutput)
-		disp(strcat("samples.Part5SampleFactorsOutput(",int2str(n),").card"));
-		disp( samples.Part5SampleFactorsOutput(n).card );
+	for n = 1:length(samples.Part6SampleFactorsOutput)
+		disp(strcat("samples.Part6SampleFactorsOutput(",int2str(n),").card"));
+		disp( samples.Part6SampleFactorsOutput(n).card );
 	end
-
-	return;
-
-	disp("samples.Part3SampleFactorsOutput(2).var");
-	disp( samples.Part3SampleFactorsOutput(2).var );
-
-	disp("samples.Part3SampleFactorsOutput(2).card");
-	disp( samples.Part3SampleFactorsOutput(2).card );
-
-	disp("samples.Part3SampleFactorsOutput(3).var");
-	disp( samples.Part3SampleFactorsOutput(3).var );
-
-	disp("samples.Part3SampleFactorsOutput(3).card");
-	disp( samples.Part3SampleFactorsOutput(3).card );
-
-	disp("length(samples.Part3SampleFactorsOutput(1).val)");
-	disp( length(samples.Part3SampleFactorsOutput(1).val) );
-
-	disp("length(samples.Part3SampleFactorsOutput(2).val)");
-	disp( length(samples.Part3SampleFactorsOutput(2).val) );
-
-	disp("length(samples.Part3SampleFactorsOutput(3).val)");
-	disp( length(samples.Part3SampleFactorsOutput(3).val) );
-
-	disp("sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(2).val))");
-	disp( sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(2).val)) );
-
-	disp("sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(3).val))");
-	disp( sum(abs(samples.Part3SampleFactorsOutput(1).val - samples.Part3SampleFactorsOutput(3).val)) );
-
-	disp("sum(abs(samples.Part3SampleFactorsOutput(1).val - tempVal))");
-	disp( sum(abs(samples.Part3SampleFactorsOutput(1).val - tempVal)) );
-
-	%disp("samples.Part3SampleFactorsOutput(1).val");
-	%disp( samples.Part3SampleFactorsOutput(1).val );
 
 	returnValue = true;
+	return;
 
 end
 
