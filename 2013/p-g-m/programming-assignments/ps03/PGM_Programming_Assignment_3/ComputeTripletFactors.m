@@ -29,4 +29,26 @@ factors = repmat(struct('var', [], 'card', [], 'val', []), n - 2, 1);
 
 % Your code here:
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tempAssignments  = zeros(length(tripletList),3);
+tempFactorValues = zeros(length(tripletList),1);
+for i = 1:length(tripletList)
+	tempAssignments(i,:) = tripletList(i).chars;
+	tempFactorValues(i)  = tripletList(i).factorVal;
 end
+
+tempIndexes = AssignmentToIndex(tempAssignments,[K K K]);
+
+tempVal = ones(K^3,1);
+tempVal(tempIndexes) = tempFactorValues;
+
+for i = 1:length(factors)
+	factors(i).var  = [i (i+1) (i+2)];
+	factors(i).card = [K K K];
+	factors(i).val  = tempVal;
+end
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+end
+
