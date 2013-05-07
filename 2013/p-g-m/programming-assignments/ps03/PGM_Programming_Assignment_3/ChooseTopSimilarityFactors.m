@@ -23,7 +23,19 @@ if (length(allFactors) <= F)
 end
 
 % Your code here:
-factors = allFactors; %%% REMOVE THIS LINE
+% factors = allFactors; %%% REMOVE THIS LINE
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+tempIndex = AssignmentToIndex([1 1],allFactors(1).card);
+similarityScores = zeros(length(allFactors),1);
+for n = 1:length(similarityScores)
+	similarityScores(n) = allFactors(n).val(tempIndex);
+end
+[temp, similarityRanks] = sort(similarityScores,'descend');
+
+factors = allFactors(similarityRanks(1:F));
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 end
 
